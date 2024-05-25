@@ -1,0 +1,16 @@
+---
+- name: Lister les dossiers dans un chemin spécifique
+  hosts: OLVM_Engine
+  vars:
+    chemin: "/"  # Remplacez ceci par le chemin souhaité
+
+  tasks:
+    - name: Lister les dossiers
+      find:
+        paths: "{{ chemin }}"
+        file_type: directory
+      register: resultats
+
+    - name: Afficher les dossiers trouvés
+      debug:
+        var: resultats.files
